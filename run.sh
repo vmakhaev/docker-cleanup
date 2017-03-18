@@ -196,7 +196,7 @@ do
     # Remove Images
     if [ -s ToBeCleaned ]; then
         echo "=> Start to clean $(cat ToBeCleaned | wc -l) images"
-        docker rmi $(cat ToBeCleaned) 2>/dev/null
+        docker rmi -f $(cat ToBeCleaned) 2>/dev/null
         (( DIFF_LAYER=${ALL_LAYER_NUM}- $(docker images -a | tail -n +2 | wc -l) ))
         (( DIFF_IMG=$(cat ImageIdList | wc -l) - $(docker images | tail -n +2 | wc -l) ))
         if [ ! ${DIFF_LAYER} -gt 0 ]; then
